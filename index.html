@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gender Roles</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  a { color: #534AB7; }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* Nav */
+  .nav-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .nav-pill {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: #fff;
+    color: #555;
+    text-decoration: none;
+  }
+
+  .nav-pill:hover {
+    background: #eee;
+  }
+
+  /* Hero */
+  .hero {
+    border-left: 3px solid #7F77DD;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero .subtitle {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .hero blockquote {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    color: #333;
+    border: none;
+    padding: 0;
+    font-style: italic;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .tab-btn {
+    font-size: 13px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .tab-btn.active {
+    background: #EEEDFE;
+    color: #3C3489;
+    border-color: #AFA9EC;
+    font-weight: 500;
+  }
+
+  .tab-btn:hover:not(.active) {
+    background: #f5f5f5;
+  }
+
+  .theme-panel {
+    display: none;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .theme-panel.visible {
+    display: block;
+  }
+
+  .theme-panel h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .theme-panel p {
+    font-size: 14px;
+    color: #444;
+  }
+
+  .quote-tag {
+    font-family: Georgia, serif;
+    font-size: 14px;
+    background: #EEEDFE;
+    color: #3C3489;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* Scholars */
+  .scholars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .scholar-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-align: center;
+  }
+
+  .scholar-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .scholar-card.selected {
+    border: 2px solid #7F77DD;
+  }
+
+  .circle-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0 auto 10px;
+    border: 2px solid #f0f0f0;
+  }
+
+  .scholar-card .name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .scholar-card .work {
+    font-size: 11px;
+    color: #888;
+  }
+
+  .scholar-detail {
+    background: #f9f8f6;
+    border-radius: 12px;
+    padding: 1.25rem;
+    min-height: 80px;
+    font-size: 14px;
+    color: #444;
+  }
+
+  .scholar-detail p {
+    margin-bottom: 0.75rem;
+  }
+
+  .connection {
+    font-size: 13px;
+    color: #534AB7;
+    background: #EEEDFE;
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+  }
+
+  /* Reflection cards */
+  .reflection-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .reflection-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .reflection-card p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+
+  .tag-surprise {
+    background: #E1F5EE;
+    color: #0F6E56;
+  }
+
+  .tag-process {
+    background: #FAEEDA;
+    color: #854F0B;
+  }
+
+  /* Works cited */
+  .works-cited {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .works-cited h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .works-cited p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 2rem 0;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav-pills" aria-label="Page sections">
+    <a class="nav-pill" href="#intro">Introduction</a>
+    <a class="nav-pill" href="#themes">Three themes</a>
+    <a class="nav-pill" href="#scholars">Scholars</a>
+    <a class="nav-pill" href="#reflection">Reflection</a>
+    <a class="nav-pill" href="#citations">Works cited</a>
+  </nav>
+
+  <section id="intro" class="hero" aria-label="Introduction">
+    <h1>Gender roles are made, not born</h1>
+    <blockquote>"Gender roles kind of puts people in a box — and I think people should be able to choose their roles without being judged by their sex or gender."</blockquote>
+  </section>
+
+  <section id="themes" class="section" aria-label="Three key themes">
+    <p class="section-label">Three key themes</p>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" onclick="showTab('social', this)">Social shaping</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab('pressure', this)">Pressure &amp; constraint</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab('resistance', this)">Resistance &amp; possibility</button>
+    </div>
+
+    <div id="tab-social" class="theme-panel visible" role="tabpanel">
+      <h3>Social shaping of gender</h3>
+      <div class="quote-tag">"Sex is what you're assigned at birth — gender is shaped by cultural stereotypes."</div>
+      <p>The interviewee distinguishes biological sex from gender, matching Judith Lorber's argument that gender is socially constructed through daily practices, expectations, and institutions — not biology. Her observation that roles change over time also fits Lorber's claim that gender is constantly made and remade through social life.</p>
+    </div>
+
+    <div id="tab-pressure" class="theme-panel" role="tabpanel">
+      <h3>Pressure &amp; constraint</h3>
+      <div class="quote-tag">"I just felt pressure to go with what the guys want."</div>
+      <p>Her experience in the MSA shows how gender norms are enforced through social pressure, not formal rules. Marilyn Frye's birdcage metaphor applies: one wire alone seems harmless, but together the many barriers limit movement and choice. The interviewee describes a classic double bind — speaking up is read as improper, yet silence means accepting unfairness.</p>
+    </div>
+
+    <div id="tab-resistance" class="theme-panel" role="tabpanel">
+      <h3>Resistance &amp; possibility</h3>
+      <div class="quote-tag">"I hope for a future with fewer — or no — fixed gender roles."</div>
+      <p>Even while naming restrictions, she insists people should be free to choose roles in family, work, and relationships. This echoes Simone de Beauvoir's argument that woman is cast as the "Other," denied full subjecthood. Her hope also resonates with Judith Butler's claim that rigid gender systems limit what kinds of lives become livable — and that those norms can be challenged and reworked.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="scholars" class="section" aria-label="Scholars in conversation">
+    <p class="section-label">Scholars in conversation — click a card</p>
+
+    <div class="scholars">
+      <div class="scholar-card" onclick="selectScholar('beauvoir', this)" tabindex="0" role="button" aria-pressed="false">
+        <img src="beauvoir.jpg" alt="Simone de Beauvoir" class="circle-avatar">
+        <div class="name">Simone de Beauvoir</div>
+        <div class="work">The Second Sex</div>
+      </div>
+
+      <div class="scholar-card" onclick="selectScholar('lorber', this)" tabindex="0" role="button" aria-pressed="false">
+        <img src="lorber.jpg" alt="Judith Lorber" class="circle-avatar">
+        <div class="name">Judith Lorber</div>
+        <div class="work">Paradoxes of Gender</div>
+      </div>
+
+      <div class="scholar-card" onclick="selectScholar('frye', this)" tabindex="0" role="button" aria-pressed="false">
+        <img src="frye.jpg" alt="Marilyn Frye" class="circle-avatar">
+        <div class="name">Marilyn Frye</div>
+        <div class="work">The Politics of Reality</div>
+      </div>
+
+      <div class="scholar-card" onclick="selectScholar('butler', this)" tabindex="0" role="button" aria-pressed="false">
+        <img src="butler.jpg" alt="Judith Butler" class="circle-avatar">
+        <div class="name">Judith Butler</div>
+        <div class="work">Gender backlash essay</div>
+      </div>
+    </div>
+
+    <div class="scholar-detail" id="scholar-detail" aria-live="polite">
+      <p style="color:#aaa;">Select a scholar above to see how their ideas connect to the interview.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="reflection" class="section" aria-label="Reflections">
+    <p class="section-label">Reflections</p>
+
+    <div class="reflection-card">
+      <span class="tag tag-surprise">Surprise</span>
+      <h3>Religion as tool, not source</h3>
+      <p>The interviewee did not frame religion itself as the main source of oppression. Instead she said people "misuse" terms like <em>haya</em> to silence women — showing that the issue is how power is exercised inside any institution, not the institution itself.</p>
+    </div>
+
+    <div class="reflection-card">
+      <span class="tag tag-surprise">Surprise</span>
+      <h3>Agency within constraint</h3>
+      <p>She made room for practical considerations in gendered career choices — some women choose caregiving fields because they want family balance. This complicates a simple victim narrative and shows how gender roles can be both constraining and strategically negotiated.</p>
+    </div>
+
+    <div class="reflection-card">
+      <span class="tag tag-process">Interview process</span>
+      <h3>What worked</h3>
+      <p>Moving from broad ideas to specific examples produced more reflective answers. Short quotes — "more demure," "go with what the guys want," "puts people in a box" — capture the participant's perspective in her own language and anchor the analysis.</p>
+    </div>
+
+    <div class="reflection-card">
+      <span class="tag tag-process">Interview process</span>
+      <h3>Productive difficulty</h3>
+      <p>Some questions were very broad, requiring careful qualification. That difficulty was productive: it revealed that gender roles are tied to power, speech, religion, work, and identity in ways that shape everyday life — not just expectations for men and women.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="citations" class="section" aria-label="Works cited">
+    <div class="works-cited">
+      <h3>Works cited</h3>
+      <p>Beauvoir, Simone de. "Introduction." <em>The Second Sex</em>, translated by H. M. Parshley, Vintage Books, 1949.</p>
+      <p>Butler, Judith. "Why Is the Backlash Against 'Gender Ideology' So Intense?" <em>The Guardian</em>, 23 Oct. 2021.</p>
+      <p>Frye, Marilyn. "Oppression." <em>The Politics of Reality: Essays in Feminist Theory</em>, Crossing Press, 1983.</p>
+      <p>Lorber, Judith. "The Social Construction of Gender." <em>Paradoxes of Gender</em>, Yale UP, 1994.</p>
+      <p>Valentine, Alex. "Why Sex Is Not Binary." <em>The New York Times</em>, 25 Oct. 2018.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const scholars = {
+  beauvoir: {
+    text: "Beauvoir argues that women are historically cast as the 'Other' — denied full subjecthood and pushed into roles defined by men. The interviewee's examples of household expectations and being silenced in the MSA illustrate this hierarchy directly.",
+    connection: "Interview link: women are expected to remain in certain places, positioned as secondary or dependent."
+  },
+  lorber: {
+    text: "Lorber argues gender is built into institutions like religion, law, and the economy, distributing power unequally. The interviewee sees gender as flexible and changing — matching Lorber's emphasis that gender is reproduced and altered through social change.",
+    connection: "Interview link: more women in careers has changed how families view women, showing gender being remade through institutions."
+  },
+  frye: {
+    text: "Frye's birdcage metaphor holds that oppression is a system of interlocking pressures, not a single bad incident. The interviewee's double bind — be modest but lose influence, or speak up and be labeled improper — exemplifies exactly this.",
+    connection: "Interview link: women expected to be 'quiet,' and haya used to discourage disagreement — pressures that work together."
+  },
+  butler: {
+    text: "Butler's writing on the backlash against 'gender ideology' explains why gender becomes politically charged: attacks on gender freedom protect a threatened social order. Her emphasis on public visibility challenging rigid norms fits the interviewee's hope that women in power can change how younger men view women.",
+    connection: "Interview link: people 'misuse' religion as a scapegoat — power protecting itself by silencing women."
+  }
+};
+
+function showTab(id, btn) {
+  document.querySelectorAll('.theme-panel').forEach(p => p.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
+  document.getElementById('tab-' + id).classList.add('visible');
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
+}
+
+function selectScholar(id, card) {
+  document.querySelectorAll('.scholar-card').forEach(c => {
+    c.classList.remove('selected');
+    c.setAttribute('aria-pressed', 'false');
+  });
+  card.classList.add('selected');
+  card.setAttribute('aria-pressed', 'true');
+  const s = scholars[id];
+  document.getElementById('scholar-detail').innerHTML =
+    '<p>' + s.text + '</p><div class="connection">' + s.connection + '</div>';
+}
+</script>
+</body>
+</html>
