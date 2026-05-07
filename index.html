@@ -42,17 +42,27 @@
     text-decoration: none;
   }
 
-  .nav-pill:hover {
-    background: #eee;
-  }
+  .nav-pill:hover { background: #eee; }
 
   /* Hero */
   .hero {
     border-left: 3px solid #7F77DD;
-    padding: 1.5rem;
     background: #fff;
     border-radius: 12px;
     margin-bottom: 2.5rem;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+
+  .hero-body {
+    padding: 1.5rem;
   }
 
   .hero .subtitle {
@@ -77,9 +87,7 @@
   }
 
   /* Sections */
-  .section {
-    margin-bottom: 2.5rem;
-  }
+  .section { margin-bottom: 2.5rem; }
 
   .section-label {
     font-size: 11px;
@@ -116,21 +124,27 @@
     font-weight: 500;
   }
 
-  .tab-btn:hover:not(.active) {
-    background: #f5f5f5;
-  }
+  .tab-btn:hover:not(.active) { background: #f5f5f5; }
 
   .theme-panel {
     display: none;
     background: #fff;
     border: 1px solid #e5e5e5;
     border-radius: 12px;
-    padding: 1.5rem;
+    overflow: hidden;
   }
 
-  .theme-panel.visible {
+  .theme-panel.visible { display: block; }
+
+  .theme-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
     display: block;
   }
+
+  .theme-body { padding: 1.5rem; }
 
   .theme-panel h3 {
     font-size: 17px;
@@ -174,13 +188,9 @@
     text-align: center;
   }
 
-  .scholar-card:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
+  .scholar-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 
-  .scholar-card.selected {
-    border: 2px solid #7F77DD;
-  }
+  .scholar-card.selected { border: 2px solid #7F77DD; }
 
   .circle-avatar {
     width: 38px;
@@ -199,10 +209,7 @@
     margin-bottom: 2px;
   }
 
-  .scholar-card .work {
-    font-size: 11px;
-    color: #888;
-  }
+  .scholar-card .work { font-size: 11px; color: #888; }
 
   .scholar-detail {
     background: #f9f8f6;
@@ -213,9 +220,7 @@
     color: #444;
   }
 
-  .scholar-detail p {
-    margin-bottom: 0.75rem;
-  }
+  .scholar-detail p { margin-bottom: 0.75rem; }
 
   .connection {
     font-size: 13px;
@@ -231,9 +236,19 @@
     background: #fff;
     border: 1px solid #e5e5e5;
     border-radius: 12px;
-    padding: 1.25rem;
     margin-bottom: 1rem;
+    overflow: hidden;
   }
+
+  .reflection-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .reflection-body { padding: 1.25rem; }
 
   .reflection-card h3 {
     font-size: 15px;
@@ -256,15 +271,8 @@
     margin-bottom: 8px;
   }
 
-  .tag-surprise {
-    background: #E1F5EE;
-    color: #0F6E56;
-  }
-
-  .tag-process {
-    background: #FAEEDA;
-    color: #854F0B;
-  }
+  .tag-surprise { background: #E1F5EE; color: #0F6E56; }
+  .tag-process  { background: #FAEEDA; color: #854F0B; }
 
   /* Works cited */
   .works-cited {
@@ -292,6 +300,14 @@
     border-top: 1px solid #e5e5e5;
     margin: 2rem 0;
   }
+
+  /* Image captions */
+  .img-caption {
+    font-size: 11px;
+    color: #aaa;
+    padding: 4px 12px 8px;
+    font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -305,69 +321,105 @@
     <a class="nav-pill" href="#citations">Works cited</a>
   </nav>
 
+  <!-- HERO -->
   <section id="intro" class="hero" aria-label="Introduction">
-    <h1>Gender roles are made, not born</h1>
-    <blockquote>"Gender roles kind of puts people in a box — and I think people should be able to choose their roles without being judged by their sex or gender."</blockquote>
+    <img
+      class="hero-img"
+      src="hero.jpg"
+      alt="Diverse group of women at a march holding signs for equality"
+      onerror="this.style.display='none'"
+    >
+    <div class="hero-body">
+      <h1>Gender roles are made, not born</h1>
+      <blockquote>"Gender roles kind of puts people in a box — and I think people should be able to choose their roles without being judged by their sex or gender."</blockquote>
+    </div>
   </section>
 
+  <!-- THEMES -->
   <section id="themes" class="section" aria-label="Three key themes">
     <p class="section-label">Three key themes</p>
     <div class="tabs" role="tablist">
-      <button class="tab-btn active" role="tab" aria-selected="true" onclick="showTab('social', this)">Social shaping</button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab('pressure', this)">Pressure &amp; constraint</button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab('resistance', this)">Resistance &amp; possibility</button>
+      <button class="tab-btn active" role="tab" aria-selected="true"  onclick="showTab('social', this)">Social shaping</button>
+      <button class="tab-btn"        role="tab" aria-selected="false" onclick="showTab('pressure', this)">Pressure &amp; constraint</button>
+      <button class="tab-btn"        role="tab" aria-selected="false" onclick="showTab('resistance', this)">Resistance &amp; possibility</button>
     </div>
 
+    <!-- Social shaping -->
     <div id="tab-social" class="theme-panel visible" role="tabpanel">
-      <h3>Social shaping of gender</h3>
-      <div class="quote-tag">"Sex is what you're assigned at birth — gender is shaped by cultural stereotypes."</div>
-      <p>The interviewee distinguishes biological sex from gender, matching Judith Lorber's argument that gender is socially constructed through daily practices, expectations, and institutions — not biology. Her observation that roles change over time also fits Lorber's claim that gender is constantly made and remade through social life.</p>
+      <img
+        class="theme-img"
+        src="theme-social.jpg"
+        alt="Children at play — gender norms begin in childhood socialisation"
+        onerror="this.style.display='none'"
+      >
+      <div class="img-caption">Gender roles begin in childhood through play, dress, and societal expectations.</div>
+      <div class="theme-body">
+        <h3>Social shaping of gender</h3>
+        <div class="quote-tag">"Sex is what you're assigned at birth — gender is shaped by cultural stereotypes."</div>
+        <p>The interviewee distinguishes biological sex from gender, matching Judith Lorber's argument that gender is socially constructed through daily practices, expectations, and institutions — not biology. Her observation that roles change over time also fits Lorber's claim that gender is constantly made and remade through social life.</p>
+      </div>
     </div>
 
+    <!-- Pressure -->
     <div id="tab-pressure" class="theme-panel" role="tabpanel">
-      <h3>Pressure &amp; constraint</h3>
-      <div class="quote-tag">"I just felt pressure to go with what the guys want."</div>
-      <p>Her experience in the MSA shows how gender norms are enforced through social pressure, not formal rules. Marilyn Frye's birdcage metaphor applies: one wire alone seems harmless, but together the many barriers limit movement and choice. The interviewee describes a classic double bind — speaking up is read as improper, yet silence means accepting unfairness.</p>
+      <img
+        class="theme-img"
+        src="theme-pressure.jpg"
+        alt="A birdcage — visual metaphor for Marilyn Frye's interlocking constraints"
+        onerror="this.style.display='none'"
+      >
+      <div class="img-caption">Frye's birdcage metaphor: each wire alone seems harmless, but together they trap.</div>
+      <div class="theme-body">
+        <h3>Pressure &amp; constraint</h3>
+        <div class="quote-tag">"I just felt pressure to go with what the guys want."</div>
+        <p>Her experience in the MSA shows how gender norms are enforced through social pressure, not formal rules. Marilyn Frye's birdcage metaphor applies: one wire alone seems harmless, but together the many barriers limit movement and choice. The interviewee describes a classic double bind — speaking up is read as improper, yet silence means accepting unfairness.</p>
+      </div>
     </div>
 
+    <!-- Resistance -->
     <div id="tab-resistance" class="theme-panel" role="tabpanel">
-      <h3>Resistance &amp; possibility</h3>
-      <div class="quote-tag">"I hope for a future with fewer — or no — fixed gender roles."</div>
-      <p>Even while naming restrictions, she insists people should be free to choose roles in family, work, and relationships. This echoes Simone de Beauvoir's argument that woman is cast as the "Other," denied full subjecthood. Her hope also resonates with Judith Butler's claim that rigid gender systems limit what kinds of lives become livable — and that those norms can be challenged and reworked.</p>
+      <img
+        class="theme-img"
+        src="theme-resistance.jpg"
+        alt="Women marching and holding signs demanding equality and freedom"
+        onerror="this.style.display='none'"
+      >
+      <div class="img-caption">Public protest as an act of resistance — refusing fixed gender roles.</div>
+      <div class="theme-body">
+        <h3>Resistance &amp; possibility</h3>
+        <div class="quote-tag">"I hope for a future with fewer — or no — fixed gender roles."</div>
+        <p>Even while naming restrictions, she insists people should be free to choose roles in family, work, and relationships. This echoes Simone de Beauvoir's argument that woman is cast as the "Other," denied full subjecthood. Her hope also resonates with Judith Butler's claim that rigid gender systems limit what kinds of lives become livable — and that those norms can be challenged and reworked.</p>
+      </div>
     </div>
   </section>
 
   <hr class="divider">
 
+  <!-- SCHOLARS -->
   <section id="scholars" class="section" aria-label="Scholars in conversation">
     <p class="section-label">Scholars in conversation — click a card</p>
-
     <div class="scholars">
       <div class="scholar-card" onclick="selectScholar('beauvoir', this)" tabindex="0" role="button" aria-pressed="false">
         <img src="beauvoir.jpg" alt="Simone de Beauvoir" class="circle-avatar">
         <div class="name">Simone de Beauvoir</div>
         <div class="work">The Second Sex</div>
       </div>
-
       <div class="scholar-card" onclick="selectScholar('lorber', this)" tabindex="0" role="button" aria-pressed="false">
         <img src="lorber.jpg" alt="Judith Lorber" class="circle-avatar">
         <div class="name">Judith Lorber</div>
         <div class="work">Paradoxes of Gender</div>
       </div>
-
       <div class="scholar-card" onclick="selectScholar('frye', this)" tabindex="0" role="button" aria-pressed="false">
         <img src="frye.jpg" alt="Marilyn Frye" class="circle-avatar">
         <div class="name">Marilyn Frye</div>
         <div class="work">The Politics of Reality</div>
       </div>
-
       <div class="scholar-card" onclick="selectScholar('butler', this)" tabindex="0" role="button" aria-pressed="false">
         <img src="butler.jpg" alt="Judith Butler" class="circle-avatar">
         <div class="name">Judith Butler</div>
         <div class="work">Gender backlash essay</div>
       </div>
     </div>
-
     <div class="scholar-detail" id="scholar-detail" aria-live="polite">
       <p style="color:#aaa;">Select a scholar above to see how their ideas connect to the interview.</p>
     </div>
@@ -375,36 +427,74 @@
 
   <hr class="divider">
 
+  <!-- REFLECTION -->
   <section id="reflection" class="section" aria-label="Reflections">
     <p class="section-label">Reflections</p>
 
+    <!-- Surprise 1 -->
     <div class="reflection-card">
-      <span class="tag tag-surprise">Surprise</span>
-      <h3>Religion as tool, not source</h3>
-      <p>The interviewee did not frame religion itself as the main source of oppression. Instead she said people "misuse" terms like <em>haya</em> to silence women — showing that the issue is how power is exercised inside any institution, not the institution itself.</p>
+      <img
+        class="reflection-img"
+        src="reflection-religion.jpg"
+        alt="Interior of a mosque — religion as an institution shaped by those in power"
+        onerror="this.style.display='none'"
+      >
+      <div class="reflection-body">
+        <span class="tag tag-surprise">Surprise</span>
+        <h3>Religion as tool, not source</h3>
+        <p>The interviewee did not frame religion itself as the main source of oppression. Instead she said people "misuse" terms like <em>haya</em> to silence women — showing that the issue is how power is exercised inside any institution, not the institution itself.</p>
+      </div>
     </div>
 
+    <!-- Surprise 2 -->
     <div class="reflection-card">
-      <span class="tag tag-surprise">Surprise</span>
-      <h3>Agency within constraint</h3>
-      <p>She made room for practical considerations in gendered career choices — some women choose caregiving fields because they want family balance. This complicates a simple victim narrative and shows how gender roles can be both constraining and strategically negotiated.</p>
+      <img
+        class="reflection-img"
+        src="reflection-agency.jpg"
+        alt="Two paths diverging — a visual metaphor for navigating constrained choices"
+        onerror="this.style.display='none'"
+      >
+      <div class="reflection-body">
+        <span class="tag tag-surprise">Surprise</span>
+        <h3>Agency within constraint</h3>
+        <p>She made room for practical considerations in gendered career choices — some women choose caregiving fields because they want family balance. This complicates a simple victim narrative and shows how gender roles can be both constraining and strategically negotiated.</p>
+      </div>
     </div>
 
+    <!-- Process 1 -->
     <div class="reflection-card">
-      <span class="tag tag-process">Interview process</span>
-      <h3>What worked</h3>
-      <p>Moving from broad ideas to specific examples produced more reflective answers. Short quotes — "more demure," "go with what the guys want," "puts people in a box" — capture the participant's perspective in her own language and anchor the analysis.</p>
+      <img
+        class="reflection-img"
+        src="reflection-interview.jpg"
+        alt="Two people in conversation — a research interview setting"
+        onerror="this.style.display='none'"
+      >
+      <div class="reflection-body">
+        <span class="tag tag-process">Interview process</span>
+        <h3>What worked</h3>
+        <p>Moving from broad ideas to specific examples produced more reflective answers. Short quotes — "more demure," "go with what the guys want," "puts people in a box" — capture the participant's perspective in her own language and anchor the analysis.</p>
+      </div>
     </div>
 
+    <!-- Process 2 -->
     <div class="reflection-card">
-      <span class="tag tag-process">Interview process</span>
-      <h3>Productive difficulty</h3>
-      <p>Some questions were very broad, requiring careful qualification. That difficulty was productive: it revealed that gender roles are tied to power, speech, religion, work, and identity in ways that shape everyday life — not just expectations for men and women.</p>
+      <img
+        class="reflection-img"
+        src="reflection-difficulty.jpg"
+        alt="People navigating space together — everyday life shaped by gender norms"
+        onerror="this.style.display='none'"
+      >
+      <div class="reflection-body">
+        <span class="tag tag-process">Interview process</span>
+        <h3>Productive difficulty</h3>
+        <p>Some questions were very broad, requiring careful qualification. That difficulty was productive: it revealed that gender roles are tied to power, speech, religion, work, and identity in ways that shape everyday life — not just expectations for men and women.</p>
+      </div>
     </div>
   </section>
 
   <hr class="divider">
 
+  <!-- WORKS CITED -->
   <section id="citations" class="section" aria-label="Works cited">
     <div class="works-cited">
       <h3>Works cited</h3>
